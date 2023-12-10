@@ -1,24 +1,66 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# テーブル設計
 
-Things you may want to cover:
+## usersテーブル
+| Column             | Type   | Options                   | 
+| ------------------ | ------ | ------------------------- |
+| name               | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| last_name          | string | null: false               |
+| first_name         | string | null: false               |
+| last_name_kana     | string | null: false               |
+| first_name_kana    | string | null: false               |
+| birthday           | date   | null: false               |
 
-* Ruby version
+- has_many :purchases
+- has_many :items
 
-* System dependencies
+## itemsテーブル
+| Column             | Type       | Options                        | 
+| ------------------ | ---------- | -------------------------------|
+| name               | string     | null: false, limit: 40         |
+| description        | text       | null: false, limit: 1000       |
+| category_id        | integer    | null: false                    |
+| condition_id       | integer    | null: false                    |
+| shipping_fee_id    | integer    | null: false                    |
+| prefecture_id      | integer    | null: false                    |
+| shipping_day_id    | integer    | null: false                    |
+| price              | integer    | null: false                    |
+| user               | references | null: false, foreign_key: true |
 
-* Configuration
+- belongs_to :user
+- has_one :purchase
+- belongs_to_active_hash :category
+- belongs_to_active_hash :condition
+- belongs_to_active_hash :shipping_fee
+- belongs_to_active_hash :prefecture
+- belongs_to_active_hash :shipping_day
 
-* Database creation
+## addressesテーブル
 
-* Database initialization
+| Column             | Type       | Options                                  | 
+| ------------------ | ---------- | ---------------------------------------- |
+| id                 | integer    | primary key                              |
+| postal_code        | string     | null: false                              |
+| prefecture_id      | string     | null: false                              |
+| city               | string     | null: false                              |
+| street_address     | string     | null: false                              |
+| building_name      | string     |                                          |
+| phone_number       | string     | null: false                              |
+| purchase           | references | null: false, foreign_key: true           |
 
-* How to run the test suite
+- belongs_to_active_hash :prefecture
+- belongs_to :purchase
 
-* Services (job queues, cache servers, search engines, etc.)
+## purchasesテーブル
+| Column      | Type       | Options                        |
+| ----------- | ---------- | ------------------------------ |
+| id          | integer    | primary key, auto increment    |
+| item        | references | null: false, foreign_key: true |
+| user        | references | null: false, foreign_key: true |
 
-* Deployment instructions
-
-* ...
+- belongs_to :user
+- belongs_to :item
+- has_one :address
