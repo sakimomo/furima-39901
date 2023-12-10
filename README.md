@@ -31,7 +31,7 @@
 | user               | references | null: false, foreign_key: true |
 
 - belongs_to :user
-- belongs_to :purchases
+- has_one :purchase
 - belongs_to_active_hash :category
 - belongs_to_active_hash :condition
 - belongs_to_active_hash :shipping_fee
@@ -49,7 +49,7 @@
 | street_address     | string     | null: false                              |
 | building_name      | string     |                                          |
 | phone_number       | string     | null: false                              |
-| item               | references | foreign_key: true                        |
+| purchase           | references | foreign_key: true                        |
 
 - belongs_to_active_hash :prefecture
 - belongs_to :purchase
@@ -63,4 +63,4 @@
 
 - belongs_to :user
 - belongs_to :item
-- belongs_to :address
+- has_one :address
