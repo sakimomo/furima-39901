@@ -49,7 +49,7 @@
 | street_address     | string     | null: false                              |
 | building_name      | string     |                                          |
 | phone_number       | string     | null: false                              |
-| purchase           | references | foreign_key: true                        |
+| purchase           | references | null: false, foreign_key: true           |
 
 - belongs_to_active_hash :prefecture
 - belongs_to :purchase
@@ -58,8 +58,8 @@
 | Column      | Type       | Options                        |
 | ----------- | ---------- | ------------------------------ |
 | id          | integer    | primary key, auto increment    |
-| item        | references | foreign_key: true              |
-| user        | references | foreign_key: true              |
+| item        | references | null: false, foreign_key: true |
+| user        | references | null: false, foreign_key: true |
 
 - belongs_to :user
 - belongs_to :item
