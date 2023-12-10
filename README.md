@@ -2,6 +2,22 @@
 
 # テーブル設計
 
+12/8やる！！！！！！！！！！！！
+
+・プルダウンで選択をする箇所はActiveHash、カラム名、型に規則がある
+  →最終課題補足カリキュラム〜カテゴリーの選択を工夫しよう〜
+
+・ER図を修正する
+
+・itemテーブル、addressテーブル（適切な外部キー、都道府県の↑）、purchaseテーブル
+   のアソシエーションを追加する、itemとaddressの都道府県を同じカラム名にして使い回す
+
+prefectureのアクティブハッシュ
+カテゴリー
+商品状態
+配送料
+発送日時
+
 ## usersテーブル
 | Column             | Type   | Options                   | 
 | ------------------ | ------ | ------------------------- |
@@ -20,37 +36,36 @@
 ## itemsテーブル
 | Column             | Type       | Options                        | 
 | ------------------ | ---------- | -------------------------------|
-| image              | string     | null: false                    |
 | name               | string     | null: false, limit: 40         |
 | description        | text       | null: false, limit: 1000       |
-| details            | text       |                                |
-| category           | string     | null: false                    |
-| condition          | string     | null: false                    |
-| shipping_fee       | string     | null: false                    |
-| shipping_from      | string     | null: false                    |
-| shipping_days      | string     | null: false                    |
+| category           | integer    | null: false                    |
+| condition          | integer    | null: false                    |
+| shipping_fee       | integer    | null: false                    |
+| prefecture         | integer    | null: false                    |
+| shipping_days      | integer    | null: false                    |
 | price              | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
 
 - belongs_to :user
+- belongs_to_active_hash :category
+- belongs_to_active_hash :condition
+- belongs_to_active_hash :shipping_fee
+- belongs_to_active_hash :prefecture
+- belongs_to_active_hash :shipping_day
 
 ## addressesテーブル
 
 | Column             | Type       | Options                                  | 
 | ------------------ | ---------- | ---------------------------------------- |
 | id                 | integer    | primary key                              |
-| user  	           | references | foreign_key: true                        |
-| item               | references | foreign_key: true                        |
-| address            | string     | null: false                              |
-| postal_code        | string     | null: false                              |
+| postal_code        | integer    | null: false                              |
 | prefecture         | string     | null: false                              |
 | city               | string     | null: false                              |
 | street_address     | string     | null: false                              |
 | building_name      | string     |                                          |
 | phone_number       | string     | null: false                              |
-| card_info          | string     | null: false                              |
-| expiration_date    | string     | null: false                              |
-| security_code      | string     | null: false                              |
+
+- belongs_to_active_hash :prefecture
 
 ## purchasesテーブル
 | Column      | Type       | Options                        |
@@ -58,6 +73,7 @@
 | id          | integer    | primary key, auto increment    |
 | item        | references | foreign_key: true              |
 | user        | references | foreign_key: true              |
-| purchased_at| datetime   | null: false                    |
 
 - belongs_to :user
+- belongs_to :item
+- belongs_to :addresses
