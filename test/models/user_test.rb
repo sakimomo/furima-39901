@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ShippingFeeTest < ActiveSupport::TestCase
+class UserTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

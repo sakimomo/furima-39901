@@ -69,6 +69,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem 'rspec-rails', '~> 4.0.0'
 end
 
 group :development do
@@ -80,3 +81,4 @@ group :production do
 end
 
 gem 'active_hash'
+gem 'devise'
