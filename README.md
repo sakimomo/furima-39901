@@ -20,8 +20,8 @@
 ## itemsテーブル
 | Column             | Type       | Options                        | 
 | ------------------ | ---------- | -------------------------------|
-| name               | string     | null: false, limit: 40         |
-| description        | text       | null: false, limit: 1000       |
+| title              | string     | null: false, limit: 40         |
+| content            | text       | null: false, limit: 1000       |
 | category_id        | integer    | null: false                    |
 | condition_id       | integer    | null: false                    |
 | shipping_fee_id    | integer    | null: false                    |

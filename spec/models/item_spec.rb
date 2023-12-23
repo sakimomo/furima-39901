@@ -25,35 +25,36 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Content can't be blank")
       end
 
-      it 'category_idが空では登録できない' do
-        @item.category_id = ''
+      it 'category_idが未選択項目だと登録できない' do
+        @item.category_id = 1 # 未選択項目のidを指定
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
-
-      it 'condition_idが空では登録できない' do
-        @item.condition_id = ''
+      
+      it 'condition_idが未選択項目だと登録できない' do
+        @item.condition_id = 1 # 未選択項目のidを指定
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition can't be blank")
       end
-
-      it 'shipping_fee_idが空では登録できない' do
-        @item.shipping_fee_id = ''
+      
+      it 'shipping_fee_idが未選択項目だと登録できない' do
+        @item.shipping_fee_id = 1 # 未選択項目のidを指定
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping fee can't be blank")
       end
-
-      it 'prefecture_idが空では登録できない' do
-        @item.prefecture_id = ''
+      
+      it 'prefecture_idが未選択項目だと登録できない' do
+        @item.prefecture_id = 1 # 未選択項目のidを指定
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
-
-      it 'shipping_day_idが空では登録できない' do
-        @item.shipping_day_id = ''
+      
+      it 'shipping_day_idが未選択項目だと登録できない' do
+        @item.shipping_day_id = 1 # 未選択項目のidを指定
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping day can't be blank")
       end
+      
 
       it 'priceが空では登録できない' do
         @item.price = ''
@@ -84,6 +85,13 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors[:price]).to include('is not a number')
       end
+
+      it 'userが紐づいていない場合登録できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
+      end
+
     end
   end
 end
