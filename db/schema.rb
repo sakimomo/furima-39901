@@ -46,6 +46,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_15_122613) do
   end
 
   create_table "items", charset: "utf8", force: :cascade do |t|
+    t.text "title", null: false
+    t.text "content", null: false
     t.integer "category_id", null: false
     t.integer "condition_id", null: false
     t.integer "shipping_fee_id", null: false
@@ -53,6 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_15_122613) do
     t.integer "shipping_day_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "price", null: false
   end
 
   create_table "users", charset: "utf8", force: :cascade do |t|
