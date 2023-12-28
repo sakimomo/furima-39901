@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :destroy, :update]
+  before_action :move_to_index, only: [:edit, :destroy]
 
   def index
     @items = Item.includes(:user).order("created_at DESC")
@@ -15,6 +16,18 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    @item = Item.find(params[:id])
+  end
+
+  def update
+    @item = Item.find(params[:id])
+
+    if @item.update(item_params)
+      redirect_to root_path
+    else
+      render :edit, status: :unprocessable_entity
+    end
+
   end
 
   def destroy
@@ -30,6 +43,15 @@ class ItemsController < ApplicationController
   end
 
   private
+  
+  def move_to_index
+    @item = Item.find(params[:id])
+    if user_signed_in? && current_user.id != @item.user_id
+      redirect_to action: :index
+    elsif !user_signed_in?
+      redirect_to new_user_session_path
+    end
+  end
 
   def item_params
     params.require(:item).permit(:image, :title, :content, :category_id, :condition_id, :shipping_fee_id, :prefecture_id,
