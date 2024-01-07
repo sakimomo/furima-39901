@@ -6,8 +6,6 @@ FactoryBot.define do
     street_address { '1-1' }
     building_name { 'ハイツ' }
     phone_number { '01234567890' }
-    user_id { 1 }
-    item_id { 2 }
     token {"tok_abcdefghijk00000000000000000"}
   end
 end
