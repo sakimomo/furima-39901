@@ -14,7 +14,7 @@
 | first_name_kana    | string | null: false               |
 | birthday           | date   | null: false               |
 
-- has_many :purchases
+- has_many :orders
 - has_many :items
 
 ## itemsテーブル
@@ -31,7 +31,7 @@
 | user               | references | null: false, foreign_key: true |
 
 - belongs_to :user
-- has_one :purchase
+- has_one :order
 - belongs_to_active_hash :category
 - belongs_to_active_hash :condition
 - belongs_to_active_hash :shipping_fee
@@ -52,9 +52,9 @@
 | purchase           | references | null: false, foreign_key: true           |
 
 - belongs_to_active_hash :prefecture
-- belongs_to :purchase
+- belongs_to :order
 
-## purchasesテーブル
+## ordersテーブル
 | Column      | Type       | Options                        |
 | ----------- | ---------- | ------------------------------ |
 | id          | integer    | primary key, auto increment    |
